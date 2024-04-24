@@ -484,7 +484,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1063030062}
-  - component: {fileID: 1063030061}
+  - component: {fileID: 1063030063}
   m_Layer: 0
   m_Name: Road
   m_TagString: Untagged
@@ -492,22 +492,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1063030061
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1063030060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c76fbd6d33e5f474bafa77a24f96c19d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 8
-  backGround1: {fileID: 316950221}
-  backGround2: {fileID: 707729498}
-  isStart: 0
 --- !u!4 &1063030062
 Transform:
   m_ObjectHideFlags: 0
@@ -525,14 +509,25 @@ Transform:
   - {fileID: 707729498}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1063030063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1063030060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c76fbd6d33e5f474bafa77a24f96c19d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 8
+  backGround1: {fileID: 316950221}
+  backGround2: {fileID: 707729498}
+  isStart: 0
 --- !u!1 &1628227716 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7544266774390750146, guid: 3517d23fffd0a1d4ba551e25b3083c25, type: 3}
-  m_PrefabInstance: {fileID: 2711503284000392463}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1628227718 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6256707796940108607, guid: 3517d23fffd0a1d4ba551e25b3083c25, type: 3}
   m_PrefabInstance: {fileID: 2711503284000392463}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1628227722
@@ -547,8 +542,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f2d6c5becc95d14799736c262a0dde8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transform: {fileID: 1628227718}
+  transform: {fileID: 0}
   speed: 3
+  rotationSpeed: 5
+  limitX: 1.89
 --- !u!1001 &2711503284000392463
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -559,11 +556,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6256707796940108607, guid: 3517d23fffd0a1d4ba551e25b3083c25, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.001
+      value: -0.2
       objectReference: {fileID: 0}
     - target: {fileID: 6256707796940108607, guid: 3517d23fffd0a1d4ba551e25b3083c25, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.4759
+      value: -3.5
       objectReference: {fileID: 0}
     - target: {fileID: 6256707796940108607, guid: 3517d23fffd0a1d4ba551e25b3083c25, type: 3}
       propertyPath: m_LocalPosition.z

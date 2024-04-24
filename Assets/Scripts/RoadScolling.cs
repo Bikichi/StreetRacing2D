@@ -35,10 +35,11 @@ public class RoadScolling : MonoBehaviour
         {
             return;
         }
-        
+
         //Time.deltaTime là một giá trị thời gian (đơn vị là giây)
-        //Time.deltaTime tính khoảng thời gian tồn tại giữa 2 frame liên tiếp - hay thời gian tồn tại của 1 frame
-        
+        //Time.deltaTime tính khoảng thời gian tồn tại giữa 2 frame liên tiếp - hay nói cách khác là thời gian tồn tại của 1 frame
+        float moveDistance = speed * Time.deltaTime; //tính toán khoảng cách mà màn hình sẽ di chuyển trong mỗi khung hình
+        transform.Translate(Vector2.down * moveDistance);
         //Translate là phương thức thành phần trong Transform được sử dụng để di chuyển đối tượng trong không gian
         //Bên trên là cú pháp, tham số truyền vào của Translate
 
