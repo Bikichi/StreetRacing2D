@@ -82,23 +82,18 @@ public class Player : MonoBehaviour
             col.gameObject.SetActive(false); //tắt đối tượng mà đã va chạm với Collider2D của đối tượng này
 
             isDead = true;
-            if (bigBang)
+            if (bigBang) //nếu đối tượng khác null
             {
-                var bigBangCopy = Instantiate(bigBang, transform.position, Quaternion.identity);
+                var bigBangCopy = Instantiate(bigBang, transform.position, Quaternion.identity); //đối tượng được tạo ra từ Instantiate là 1 bản sao của bigBang
                 //Instantiate() là một phương thức được sử dụng để tạo ra một BẢN SAO mới của một prefab hoặc một đối tượng có sẵn trong trò chơi
                 //truyền vào GameOject, vị trí, góc quay 
-                //Một quaternion là một cách biểu diễn các phép quay trong không gian ba chiều. 
+                //Một Quaternion là một cách biểu diễn các phép quay trong không gian ba chiều. 
                 //khi bạn sử dụng Quaternion.identity, bạn đang chỉ định rằng không có phép quay nào được áp dụng, nghĩa là đối tượng sẽ không bị xoay khi được tạo ra hoặc di chuyển 
-                Destroy(bigBangCopy, 0.15f);
-                //phải set 1 khoảng thời gian chờ để chạy animation trước khi Destroy GameObject
+                Destroy(bigBangCopy, 0.2f);
+                //phải set 1 khoảng thời gian chờ để chạy Animation trước khi Destroy GameObject
                 //StartCoroutine(DelayAndDestroy(bigBangCopy, 0.15f));
-                //đây là 1 cách hoặc có cách khác là ta có thêm script AnimationEvent vào Animation
+                //đây là 1 cách khác hoặc có cách khác là ta có thêm script AnimationEvent vào Animation
             }
-
-            //if (isDead)
-            //{
-            //    DestroyImmediate(bigBang, true);
-            //}
         }
     }
 
