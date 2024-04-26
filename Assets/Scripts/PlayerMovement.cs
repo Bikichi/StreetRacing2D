@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
     public float speed; 
     public float rotationSpeed;
     public float limitX = 1.89f; // giá trị điểm position.x giới hạn để Player không đi ra khỏi màn hình game
+    public GameObject bigBang;
+    public bool isDead;
     void Start()
     {
         transform = GetComponent<Transform>(); //dòng code này thay cho thao tác kéo tham chiếu transform của đối tượng
@@ -69,4 +71,40 @@ public class Player : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, 0), rotationSpeed * Time.deltaTime);
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D col) //Đây là khai báo của phương thức
+                                                  //Nó sẽ được gọi mỗi khi một Collider2D khác va chạm với Collider2D của đối tượng này
+                                                  //Tham số "col" là Collider2D của đối tượng khác mà va chạm với Collider2D của đối tượng này.
+    {
+        if (col.CompareTag(Const.CARS_TAG)) //nếu đối tượng này va chạm với đối tượng có tag là CARS_TAG thì thực thi
+        {
+            gameObject.SetActive(false); //tắt đối tượng và phương thức gắn vào
+            col.gameObject.SetActive(false); //tắt đối tượng mà đã va chạm với Collider2D của đối tượng này
+
+            isDead = true;
+            if (bigBang)
+            {
+                var bigBangCopy = Instantiate(bigBang, transform.position, Quaternion.identity);
+                //Instantiate() là một phương thức được sử dụng để tạo ra một BẢN SAO mới của một prefab hoặc một đối tượng có sẵn trong trò chơi
+                //truyền vào GameOject, vị trí, góc quay 
+                //Một quaternion là một cách biểu diễn các phép quay trong không gian ba chiều. 
+                //khi bạn sử dụng Quaternion.identity, bạn đang chỉ định rằng không có phép quay nào được áp dụng, nghĩa là đối tượng sẽ không bị xoay khi được tạo ra hoặc di chuyển 
+                Destroy(bigBangCopy, 0.15f);
+                //phải set 1 khoảng thời gian chờ để chạy animation trước khi Destroy GameObject
+                //StartCoroutine(DelayAndDestroy(bigBangCopy, 0.15f));
+                //đây là 1 cách hoặc có cách khác là ta có thêm script AnimationEvent vào Animation
+            }
+
+            //if (isDead)
+            //{
+            //    DestroyImmediate(bigBang, true);
+            //}
+        }
+    }
+
+    //private IEnumerator DelayAndDestroy(GameObject obj, float delay)
+    //{
+    //    yield return new WaitForSeconds(delay);
+    //    Destroy(obj);
+    //}
 }

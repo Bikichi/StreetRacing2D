@@ -5,14 +5,12 @@ using UnityEngine;
 public class CarMovement : MonoBehaviour
 {
     public Transform transform;
-    public float speed;
-    // Start is called before the first frame update
+    public float speed = 5f;
     void Start()
     {
         transform = GetComponent<Transform>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         transform.position -= new Vector3(0, speed * Time.deltaTime, 0);
