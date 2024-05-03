@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
@@ -10,18 +12,40 @@ public class Player : MonoBehaviour
     public float speed; 
     public float rotationSpeed;
     public float limitX = 1.89f; // giá trị điểm position.x giới hạn để Player không đi ra khỏi màn hình game
+    public float limitY = 3.5f; //tương tự
     public GameObject bigBang;
     public bool isDead;
+    public RoadScolling roadScolling;
+    public ScoreManger scoreManger;
     void Start()
     {
         transform = GetComponent<Transform>(); //dòng code này thay cho thao tác kéo tham chiếu transform của đối tượng
+        scoreManger = GameObject.FindObjectOfType<ScoreManger>();
+        roadScolling = GameObject.FindObjectOfType<RoadScolling>();
     }
 
     void Update()
     {
-        //float moveDistance = speed * Time.deltaTime;
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            roadScolling.speed = 12;
+            transform.position += new Vector3(0, speed * Time.deltaTime, 0);
+        }
+
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            roadScolling.speed = 4;
+            transform.position -= new Vector3(0, speed * Time.deltaTime, 0);
+        }
+
+        if (!Input.GetKey(KeyCode.UpArrow) && !Input.GetKey(KeyCode.DownArrow))
+        {
+            roadScolling.speed = 8;
+        }
+
         if (Input.GetKey(KeyCode.RightArrow))
         {
+            //float moveDistance = speed * Time.deltaTime;
             //transform.Translate(Vector2.right * moveDistance); 
             //code theo cách này xảy ra lỗi mỗi khi quay hướng đối tượng sẽ bị lùi dần xuống theo góc chéo vì Translate di chuyển cả đối tượng, chứ không di chuyển đối tượng theo hệ tọa độ
             transform.position += new Vector3(speed * Time.deltaTime, 0, 0);// += vì đi sang phải theo trục x
@@ -45,7 +69,7 @@ public class Player : MonoBehaviour
         }
 
         //cách làm để đối tượng không di chuyển ra khỏi màn hình chính
-        if (transform.position.x < -limitX) 
+        if (transform.position.x <= -limitX) 
             //nếu đối tượng di chuyển qua điểm giới hạn thì khởi tạo lại đối tượng ở ngay điểm giới hạn đấy
             //phải set tọa độ Vector3 nếu không tọa độ z mặc định sẽ bằng 0, và sẽ bị nằm dưới background
         {
@@ -61,7 +85,7 @@ public class Player : MonoBehaviour
             vì đối tượng gần như đồng thời quay về góc 0 và gần như đồng thời quay về góc như trên lúc di chuyển set*/
         }
 
-        else if (transform.position.x > limitX)
+        else if (transform.position.x >= limitX)
         {
             transform.position = new Vector3(
                 limitX,
@@ -69,6 +93,26 @@ public class Player : MonoBehaviour
                 transform.position.z
                 );
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, 0), rotationSpeed * Time.deltaTime);
+        }
+
+        if (transform.position.y >= limitY)
+        {
+            transform.position = new Vector3(
+                transform.position.x,
+                limitY,
+                transform.position.z
+                );
+            roadScolling.speed = 8;
+        }
+
+        else if (transform.position.y <= -limitY)
+        {
+            transform.position = new Vector3(
+                transform.position.x,
+                -limitY,
+                transform.position.z
+                );
+            roadScolling.speed = 8;
         }
     }
 
@@ -78,8 +122,8 @@ public class Player : MonoBehaviour
     {
         if (col.CompareTag(Const.CARS_TAG)) //nếu đối tượng này va chạm với đối tượng có tag là CARS_TAG thì thực thi
         {
-            gameObject.SetActive(false); //tắt đối tượng và phương thức gắn vào
-            col.gameObject.SetActive(false); //tắt đối tượng mà đã va chạm với Collider2D của đối tượng này
+            /*gameObject.SetActive(false);*/ //tắt đối tượng và phương thức gắn vào
+            Destroy(col.gameObject); //hủy đối tượng va chạm phải
 
             isDead = true;
             if (bigBang) //nếu đối tượng khác null
@@ -94,6 +138,12 @@ public class Player : MonoBehaviour
                 //StartCoroutine(DelayAndDestroy(bigBangCopy, 0.15f));
                 //đây là 1 cách khác hoặc có cách khác là ta có thêm script AnimationEvent vào Animation
             }
+        }
+
+        if (col.CompareTag(Const.COIN_TAG))
+        {
+            Destroy(col.gameObject);
+            scoreManger.score += 10;
         }
     }
 

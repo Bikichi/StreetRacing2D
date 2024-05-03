@@ -4,27 +4,52 @@ using UnityEngine;
 
 public class SpawningCars : MonoBehaviour
 {
-    public GameObject[] car; //mảng các gameobject
+    public Transform carsTransform;
+    public GameObject[] cars;
+
+    public bool isGamePlaying;
+
+    public float minSpawnCarsTime;
+    public float maxSpawnCarsTime;
+
+    public float elapsedTime;
+    public float delayTime;
     void Start()
     {
-        StartCoroutine(SpawnCars());//???
+        carsTransform = GetComponent<Transform>();
+        //StartCoroutine(SpawningCoins());
+        // sử dụng hàm StartCoroutine() để khởi chạy các hàm bất đồng bộ
+        //hàm này cũng chỉ khởi tạo 1 lần duy nhất khi chương trình bắt đầu chạy
     }
-
-    public void CarsSpawn()
+    void Update()
     {
-        int randomCarsSpawn = Random.Range(0, car.Length);
-        float ranXPosition = Random.Range(-1.89f, 1.89f);
-        var carsSpawn =  Instantiate(car[randomCarsSpawn], new Vector3(ranXPosition, transform.position.y, transform.position.z), Quaternion.Euler(0, 0, 90));
-        //position không set trong code thì lúc chạy sẽ lấy position của gameobject lúc kéo thả trong Unity
-        //??? tại sao Prefab set hướng rồi mà lúc sinh bản sao vẫn phải set lại hướng nhỉ?
-    }
-
-    IEnumerator SpawnCars() //???
-    {
-        while (true)
+        if (isGamePlaying)
         {
-            yield return new WaitForSeconds(1f);//???
-            CarsSpawn();
+            elapsedTime += Time.deltaTime;
+
+            if (elapsedTime >= delayTime)
+            {
+                elapsedTime = 0f;
+                Invoke("CarsSpawn", Random.Range(minSpawnCarsTime, maxSpawnCarsTime));
+            }
         }
-    } 
+    }
+
+    void CarsSpawn()
+    {
+        Instantiate(cars[Random.Range(0, cars.Length)], new Vector3(Random.Range(-1.89f, 1.89f), transform.position.y, transform.position.z), Quaternion.Euler(0, 0, 90));
+    }
+
+    //IEnumerator SpawnCars()
+    //IEnumerator là một giao diện(interface) trong ngôn ngữ lập trình C#
+    //IEnumerator thường được sử dụng để triển khai các coroutine
+    //Coroutine đại khái là các hàm chạy bất đồng bộ mà có thể tạm dừng và tiếp tục sau một khoảng thời gian hoặc khi một điều kiện nào đó được đáp ứng.
+    //{
+    //    //float spawmTime = Random.Range(0.5f, 2f);
+    //    //yield return new WaitForSeconds(spawmTime);
+    //    //    //Bằng cách sử dụng các lệnh yield kết hợp với WaitForSeconds(),
+    //    //    //có thể tạm dừng thực thi của coroutine và sau đó tiếp tục nó sau một khoảng thời gian nhất định hoặc khi một đSiều kiện nào đó được đáp ứng.
+    //    //CarsSpawn();
+    //        //spawningStarted = false;
+    //}
 }
