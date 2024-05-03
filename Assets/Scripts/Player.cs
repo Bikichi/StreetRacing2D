@@ -4,10 +4,14 @@ using System.Collections.Generic;
 using System.Data;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
+    public static Player Ins; //khởi tạo Design Pattern - Singletons, thể hiện tính toàn cục và duy nhất
+    //các Class khác có thể truy cập tới thuộc tính của class này
+    //game chỉ có 1 player nên có thể dùng Singletons
     public Transform transform;
     public float speed; 
     public float rotationSpeed;
@@ -16,62 +20,104 @@ public class Player : MonoBehaviour
     public GameObject bigBang;
     public bool isDead;
     public RoadScolling roadScolling;
-    public ScoreManger scoreManger;
+
+    private void Awake()
+    {
+        if (Ins != null && Ins != this) //nếu như đã có thằng khác khởi tạo Singletons này
+        {
+            Destroy(Ins);
+        }
+        else 
+        {
+            Ins = this;
+        }
+    }
+
     void Start()
     {
         transform = GetComponent<Transform>(); //dòng code này thay cho thao tác kéo tham chiếu transform của đối tượng
-        scoreManger = GameObject.FindObjectOfType<ScoreManger>();
-        roadScolling = GameObject.FindObjectOfType<RoadScolling>();
+        roadScolling = GameObject.FindObjectOfType<RoadScolling>(); //Tìm đối tượng RoadScolling trong Scene để tham chiếu
+        ////Phương thức GetComponent<>() được sử dụng để lấy thành phần (component) được gắn vào cùng một đối tượng với script hiện tại.
+        ////Trong trường hợp của bạn, nếu hai scripts PlayerManager và RoadScolling không được gắn vào cùng một đối tượng, việc sử dụng GetComponent<RoadScolling>() sẽ không hoạt động.
+        ////Để lấy thành phần từ một đối tượng khác trong Scene, bạn cần sử dụng các phương thức khác như FindObjectOfType<>() hoặc lưu trữ đối tượng đó từ một nguồn khác như đã đề cập trong cách trước đó.
+        ////GetComponent<RoadScolling>() trong trường hợp này sẽ không hoạt động vì nó không thể tìm thấy thành phần RoadScolling trên cùng một đối tượng chứa script PlayerManager.
+    }
+    void Update()
+    {
+        if (isDead || !GameManager.Ins.isGamePlaying) return;
+        MoveDown();
+        MoveUp();
+        CheckMoveUpDown();
+        MoveLeft();
+        MoveRight();
+        CheckMoveLeftRight();
+        CheckLimitPositionX();
+        CheckLimitPositionY();
     }
 
-    void Update()
+    void MoveUp ()
     {
         if (Input.GetKey(KeyCode.UpArrow))
         {
             roadScolling.speed = 12;
             transform.position += new Vector3(0, speed * Time.deltaTime, 0);
         }
+    }
 
+    void MoveDown()
+    {
         if (Input.GetKey(KeyCode.DownArrow))
         {
             roadScolling.speed = 4;
             transform.position -= new Vector3(0, speed * Time.deltaTime, 0);
         }
+    } 
 
+    void CheckMoveUpDown () 
+    {
         if (!Input.GetKey(KeyCode.UpArrow) && !Input.GetKey(KeyCode.DownArrow))
         {
             roadScolling.speed = 8;
         }
+    }
 
+    void MoveRight()
+    {
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            //float moveDistance = speed * Time.deltaTime;
-            //transform.Translate(Vector2.right * moveDistance); 
-            //code theo cách này xảy ra lỗi mỗi khi quay hướng đối tượng sẽ bị lùi dần xuống theo góc chéo vì Translate di chuyển cả đối tượng, chứ không di chuyển đối tượng theo hệ tọa độ
             transform.position += new Vector3(speed * Time.deltaTime, 0, 0);// += vì đi sang phải theo trục x
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, -25), rotationSpeed * Time.deltaTime);
             //Quaternion.Euler() trong Unity được sử dụng để tạo ra một đối tượng Quaternion từ các giá trị Euler.
             //Euler là cách biểu diễn góc quay trong không gian ba chiều bằng cách sử dụng ba giá trị số thực, mỗi giá trị đại diện cho góc quay quanh một trong ba trục(x, y, z).
             //Quaternion.Lerp() quay đối tượng từ hướng này, sang hướng khác, với tốc độ nhất định.
         }
+    }
 
+    void MoveLeft()
+    {
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             transform.position -= new Vector3(speed * Time.deltaTime, 0, 0);// -= vì đi sang trái theo trục x
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, 25), rotationSpeed * Time.deltaTime);
         }
+    }
 
+    void CheckMoveLeftRight() 
+    {
         if (!Input.GetKey(KeyCode.RightArrow) && !Input.GetKey(KeyCode.LeftArrow))
         {
             // Quay trở lại góc 0 độ
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, 0), rotationSpeed * Time.deltaTime);
 
         }
+    }
 
+    void CheckLimitPositionX()
+    {
         //cách làm để đối tượng không di chuyển ra khỏi màn hình chính
-        if (transform.position.x <= -limitX) 
-            //nếu đối tượng di chuyển qua điểm giới hạn thì khởi tạo lại đối tượng ở ngay điểm giới hạn đấy
-            //phải set tọa độ Vector3 nếu không tọa độ z mặc định sẽ bằng 0, và sẽ bị nằm dưới background
+        if (transform.position.x <= -limitX)
+        //nếu đối tượng di chuyển qua điểm giới hạn thì khởi tạo lại đối tượng ở ngay điểm giới hạn đấy
+        //phải set tọa độ Vector3 nếu không tọa độ z mặc định sẽ bằng 0, và sẽ bị nằm dưới background
         {
             transform.position = new Vector3(
                 -limitX,
@@ -94,7 +140,10 @@ public class Player : MonoBehaviour
                 );
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, 0), rotationSpeed * Time.deltaTime);
         }
+    }
 
+    void CheckLimitPositionY()
+    {
         if (transform.position.y >= limitY)
         {
             transform.position = new Vector3(
@@ -116,13 +165,18 @@ public class Player : MonoBehaviour
         }
     }
 
+    void RespawnPlayer()
+    {
+        
+    }
+
     private void OnTriggerEnter2D(Collider2D col) //Đây là khai báo của phương thức
                                                   //Nó sẽ được gọi mỗi khi một Collider2D khác va chạm với Collider2D của đối tượng này
                                                   //Tham số "col" là Collider2D của đối tượng khác mà va chạm với Collider2D của đối tượng này.
     {
         if (col.CompareTag(Const.CARS_TAG)) //nếu đối tượng này va chạm với đối tượng có tag là CARS_TAG thì thực thi
         {
-            /*gameObject.SetActive(false);*/ //tắt đối tượng và phương thức gắn vào
+            gameObject.SetActive(false); //tắt đối tượng và phương thức gắn vào
             Destroy(col.gameObject); //hủy đối tượng va chạm phải
 
             isDead = true;
@@ -135,21 +189,13 @@ public class Player : MonoBehaviour
                 //khi bạn sử dụng Quaternion.identity, bạn đang chỉ định rằng không có phép quay nào được áp dụng, nghĩa là đối tượng sẽ không bị xoay khi được tạo ra hoặc di chuyển 
                 Destroy(bigBangCopy, 0.2f);
                 //phải set 1 khoảng thời gian chờ để chạy Animation trước khi Destroy GameObject
-                //StartCoroutine(DelayAndDestroy(bigBangCopy, 0.15f));
-                //đây là 1 cách khác hoặc có cách khác là ta có thêm script AnimationEvent vào Animation
             }
         }
 
         if (col.CompareTag(Const.COIN_TAG))
         {
             Destroy(col.gameObject);
-            scoreManger.score += 10;
+            ScoreManager.Ins.score += 10;
         }
     }
-
-    //private IEnumerator DelayAndDestroy(GameObject obj, float delay)
-    //{
-    //    yield return new WaitForSeconds(delay);
-    //    Destroy(obj);
-    //}
 }

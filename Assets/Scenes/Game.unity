@@ -323,53 +323,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 26064638}
   m_CullTransparentMesh: 1
---- !u!1 &211381116
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 211381118}
-  - component: {fileID: 211381117}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &211381117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 211381116}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f35051c40b3e3440876f0ccb53e8f60, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawningCars: {fileID: 1209347139}
-  spawningCoins: {fileID: 1744009813}
-  roadScolling: {fileID: 1063030063}
---- !u!4 &211381118
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 211381116}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &240039879
 GameObject:
   m_ObjectHideFlags: 0
@@ -1027,7 +980,7 @@ GameObject:
   - component: {fileID: 540934078}
   - component: {fileID: 540934077}
   m_Layer: 5
-  m_Name: GameoverDialog
+  m_Name: GameoverMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1683,7 +1636,7 @@ GameObject:
   - component: {fileID: 928062951}
   - component: {fileID: 928062950}
   m_Layer: 5
-  m_Name: PauseDialog
+  m_Name: PauseMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2087,10 +2040,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
-  scoreText: {fileID: 994182782}
   bestScore: 9999
   lastScore: 0
-  player: {fileID: 1628227722}
+  scoreText: {fileID: 994182782}
   lastScoreText: {fileID: 22675896}
   bestScoreText: {fileID: 1507758289}
 --- !u!1 &1063030060
@@ -2142,7 +2094,51 @@ MonoBehaviour:
   speed: 8
   backGround1: {fileID: 316950221}
   backGround2: {fileID: 707729498}
-  isStart: 0
+--- !u!1 &1069598481
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1069598483}
+  - component: {fileID: 1069598482}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1069598482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1069598481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f35051c40b3e3440876f0ccb53e8f60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGamePlaying: 0
+--- !u!4 &1069598483
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1069598481}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1209347137
 GameObject:
   m_ObjectHideFlags: 0
@@ -2204,7 +2200,6 @@ MonoBehaviour:
   - {fileID: 1218269082414464, guid: da743328ee8d8c64fa2aa20825823731, type: 3}
   - {fileID: 1005927378756554, guid: 30affabb0e6098d41bab18250938a300, type: 3}
   - {fileID: 1127563288251354, guid: e9d84a96219dd234596c257cbc85fdcf, type: 3}
-  isGamePlaying: 0
   minSpawnCarsTime: 0.8
   maxSpawnCarsTime: 1.5
   elapsedTime: 0
@@ -2909,7 +2904,6 @@ MonoBehaviour:
   bigBang: {fileID: 3836447719441125161, guid: 45e82069ce3f05246af5c68f6215b52e, type: 3}
   isDead: 0
   roadScolling: {fileID: 1063030063}
-  scoreManger: {fileID: 1042828781}
 --- !u!1 &1645791036
 GameObject:
   m_ObjectHideFlags: 0
@@ -3174,7 +3168,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transform: {fileID: 0}
   coin: {fileID: 2921859019105143277, guid: 383824b87a19e1644aaa32032cfbb087, type: 3}
-  isGamePlaying: 0
   minSpawnCoinsTime: 1.5
   maxSpawnCoinsTime: 2
   elapsedTime: 0
@@ -4321,9 +4314,9 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
-  - {fileID: 211381118}
   - {fileID: 2711503284000392463}
   - {fileID: 1063030062}
+  - {fileID: 1069598483}
   - {fileID: 1042828780}
   - {fileID: 911255976}
   - {fileID: 436856278}

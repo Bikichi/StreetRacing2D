@@ -7,8 +7,6 @@ public class SpawningCoins : MonoBehaviour
 {
     public Transform transform;
     public GameObject coin;  
-
-    public bool isGamePlaying;  
     
     public float minSpawnCoinsTime;
     public float maxSpawnCoinsTime;
@@ -23,7 +21,7 @@ public class SpawningCoins : MonoBehaviour
 
     void Update()
     {
-        if (isGamePlaying)
+        if (GameManager.Ins.isGamePlaying)
         {
             elapsedTime += Time.deltaTime; //thời gian này là tốc độ của các frame chứ không phải giây thông thường
 

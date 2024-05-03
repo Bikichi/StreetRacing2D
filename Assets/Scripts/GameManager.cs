@@ -1,21 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public SpawningCars spawningCars;
-    public SpawningCoins spawningCoins;
-    public RoadScolling roadScolling;
+    public static GameManager Ins;
+    public bool isGamePlaying;
+    public GameObject homeGui;
+    public GameObject gameGui;
+    public GameObject gameOverMenu;
+    public GameObject pauseMenu;
+
+    private void Awake()
+    {
+        if (Ins != null && Ins != this)
+        {
+            Destroy(Ins);
+        }
+        else
+        {
+            Ins = this;
+        }
+    }
 
     void Update()
     {
+        PlayGame();
+    }
+
+    void PlayGame()
+    {
         if (Input.GetKey(KeyCode.Space))
         {
-            roadScolling.isStart = true;
-            spawningCars.isGamePlaying = true;
-            spawningCoins.isGamePlaying = true;
+            isGamePlaying = true;
         }
     }
 }

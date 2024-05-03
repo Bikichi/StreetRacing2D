@@ -7,8 +7,6 @@ public class SpawningCars : MonoBehaviour
     public Transform carsTransform;
     public GameObject[] cars;
 
-    public bool isGamePlaying;
-
     public float minSpawnCarsTime;
     public float maxSpawnCarsTime;
 
@@ -23,7 +21,7 @@ public class SpawningCars : MonoBehaviour
     }
     void Update()
     {
-        if (isGamePlaying)
+        if (GameManager.Ins.isGamePlaying)
         {
             elapsedTime += Time.deltaTime;
 

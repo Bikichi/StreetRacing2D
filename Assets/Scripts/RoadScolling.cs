@@ -12,7 +12,7 @@ public class RoadScolling : MonoBehaviour
     public Transform backGround1; //biến kiểu Transform (vị trí, hướng, độ lớn)
     public Transform backGround2;
     float ySize; //chiều cao của background
-    public bool isStart;
+    //public bool isStartScolling;
 
     public void Awake() //chương trình sẽ chạy hàm này đầu tiên sau đó bắt đầu trò chơi
                         //hàm này sẽ được chạy trước các hàm như Start(), Update(), LateUpdate(), FixedUpdate(),...
@@ -32,7 +32,7 @@ public class RoadScolling : MonoBehaviour
 
     public void Update() // hàm này được gọi mỗi frame (khung hình)
     {
-        if (!isStart)
+        if (!GameManager.Ins.isGamePlaying)
         {
             return;
         }
