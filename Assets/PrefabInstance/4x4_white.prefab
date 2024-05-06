@@ -50,7 +50,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transform: {fileID: 0}
-  speed: 5
+  speed: 6
+  hasPassed: 0
 --- !u!212 &212208894386280381
 SpriteRenderer:
   m_ObjectHideFlags: 0

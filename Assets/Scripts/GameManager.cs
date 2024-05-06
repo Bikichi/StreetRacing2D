@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Ins;
+    public static GameManager Ins;//Singletons
+
     public bool isGamePlaying;
     public GameObject homeGui;
     public GameObject gameGui;
-    public GameObject gameOverMenu;
-    public GameObject pauseMenu;
+    public GameObject pauseDialog;
+    public GameObject gameoverDiolog;
+    public Text timeCountingText;
 
     private void Awake()
     {
@@ -23,16 +26,74 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Update()
+    public void ShowGameGUI(bool isShow)
     {
-        PlayGame();
+        if (gameGui)
+        {
+            gameGui.SetActive(isShow);
+        }
+
+        if (homeGui)    
+        {
+            homeGui.SetActive(!isShow);
+        }
     }
 
-    void PlayGame()
+    public void UpdateTimeCountingText(float time) 
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (timeCountingText) 
         {
-            isGamePlaying = true;
+            timeCountingText.gameObject.SetActive(true);
+            timeCountingText.text = time.ToString();
+            if (time <= 0)
+            {
+                timeCountingText.gameObject.SetActive(false);
+            }
         }
+    }
+
+    public void PlayGame()
+    {
+        homeGui.SetActive(false);
+        StartCoroutine(CountingDown());
+    }
+
+
+    void Start()
+    {
+        ShowGameGUI(false);
+    }
+
+    public void PauseGame ()
+    {
+        Time.timeScale = 0f;
+        if (pauseDialog)
+        {
+            pauseDialog.SetActive(true);
+        }
+    }
+    
+    public void GameOver()
+    {
+        isGamePlaying = false;
+        ScoreManager.Ins.lastScore = ScoreManager.Ins.score;
+        gameoverDiolog.SetActive(true);
+    }
+
+    IEnumerator CountingDown()
+    {
+        float time = 3f;
+
+        UpdateTimeCountingText(time);
+
+        while (time > 0f)
+        {
+            yield return new WaitForSeconds(1f);
+            time--;
+            UpdateTimeCountingText(time);
+        }
+
+        isGamePlaying = true;
+        ShowGameGUI(true);
     }
 }

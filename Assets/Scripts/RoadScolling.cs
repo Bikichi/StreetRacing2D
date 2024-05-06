@@ -32,10 +32,8 @@ public class RoadScolling : MonoBehaviour
 
     public void Update() // hàm này được gọi mỗi frame (khung hình)
     {
-        if (!GameManager.Ins.isGamePlaying)
-        {
+        if (!GameManager.Ins.isGamePlaying || Player.Ins.isDead)
             return;
-        }
 
         //Time.deltaTime là một giá trị thời gian (đơn vị là giây)
         //Time.deltaTime tính khoảng thời gian tồn tại giữa 2 frame liên tiếp,  - hay nói cách khác là thời gian tồn tại của 1 frame

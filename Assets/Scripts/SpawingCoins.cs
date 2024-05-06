@@ -21,7 +21,7 @@ public class SpawningCoins : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.Ins.isGamePlaying)
+        if (GameManager.Ins.isGamePlaying && !Player.Ins.isDead)
         {
             elapsedTime += Time.deltaTime; //thời gian này là tốc độ của các frame chứ không phải giây thông thường
 

@@ -4,14 +4,12 @@ using System.Collections.Generic;
 using System.Data;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
-using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
     public static Player Ins; //khởi tạo Design Pattern - Singletons, thể hiện tính toàn cục và duy nhất
     //các Class khác có thể truy cập tới thuộc tính của class này
-    //game chỉ có 1 player nên có thể dùng Singletons
+    //game chỉ có 1 player nên mới có thể dùng Singletons
     public Transform transform;
     public float speed; 
     public float rotationSpeed;
@@ -68,7 +66,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            roadScolling.speed = 4;
+            roadScolling.speed = 6;
             transform.position -= new Vector3(0, speed * Time.deltaTime, 0);
         }
     } 
@@ -165,9 +163,9 @@ public class Player : MonoBehaviour
         }
     }
 
-    void RespawnPlayer()
+    void RespawnPlayer() //khi xem quảng cáo thì thực hiện logic này để Player hồi sinh
     {
-        
+        //...
     }
 
     private void OnTriggerEnter2D(Collider2D col) //Đây là khai báo của phương thức
@@ -190,6 +188,7 @@ public class Player : MonoBehaviour
                 Destroy(bigBangCopy, 0.2f);
                 //phải set 1 khoảng thời gian chờ để chạy Animation trước khi Destroy GameObject
             }
+            GameManager.Ins.GameOver();
         }
 
         if (col.CompareTag(Const.COIN_TAG))

@@ -38,12 +38,10 @@ public class ScoreManager : MonoBehaviour
 
     void Update()
     {
-        if (Player.Ins.isDead && !GameManager.Ins.isGamePlaying) return;
-        ScoreValue();
+        UpdateScoreValue();
     }
-   
 
-    void ScoreValue ()
+    void UpdateScoreValue ()
     {
         scoreText.text = "Score: " + score.ToString();
         lastScoreText.text = lastScore.ToString();
