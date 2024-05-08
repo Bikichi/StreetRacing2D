@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 
 public class RoadScolling : MonoBehaviour
 {
+    public static RoadScolling Ins;
     //ý tưởng là sẽ có 2 background y hệt nhau khởi tạo liên tiếp nhau khi ô tô của người chơi chạy hết background2 thì sẽ đảo background1 kia vào kế tiếp
     //chạy hết background1 thì ngược lại, cứ liên tục như vậy
     public float speed; //tốc độ trôi của màn hình
@@ -14,7 +15,19 @@ public class RoadScolling : MonoBehaviour
     float ySize; //chiều cao của background
     //public bool isStartScolling;
 
-    public void Awake() //chương trình sẽ chạy hàm này đầu tiên sau đó bắt đầu trò chơi
+    private void Awake()
+    {
+        if (Ins != null && Ins != this)
+        {
+            Destroy(Ins);
+        }
+        else
+        {
+            Ins = this;
+        }
+    }
+
+    public void Start() //chương trình sẽ chạy hàm này đầu tiên sau đó bắt đầu trò chơi
                         //hàm này sẽ được chạy trước các hàm như Start(), Update(), LateUpdate(), FixedUpdate(),...
     {
         ySize = backGround1.GetComponent<BoxCollider2D>().size.y * backGround1.transform.localScale.y;

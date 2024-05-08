@@ -608,7 +608,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &282394313
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1449,7 +1449,7 @@ Transform:
   m_GameObject: {fileID: 647090541}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.01, y: -2.309, z: 0}
+  m_LocalPosition: {x: -0.01, y: -2.309, z: -0.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2355,7 +2355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c76fbd6d33e5f474bafa77a24f96c19d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 8
+  speed: 12
   backGround1: {fileID: 316950221}
   backGround2: {fileID: 707729498}
 --- !u!1 &1069598481
@@ -2627,7 +2627,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 270, y: -126.07}
+  m_AnchoredPosition: {x: 270, y: -126.069824}
   m_SizeDelta: {x: 540, y: -1212.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1384297482
@@ -2758,6 +2758,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transform: {fileID: 0}
   player: {fileID: 7544266774390750146, guid: 3517d23fffd0a1d4ba551e25b3083c25, type: 3}
+  effect: {fileID: 1967835574231978638, guid: 0b3f9f8b1e680204c94172913f5f1ab7, type: 3}
 --- !u!1 &1436665498
 GameObject:
   m_ObjectHideFlags: 0
@@ -3393,7 +3394,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1696540907}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

@@ -11,6 +11,8 @@ public class Car : MonoBehaviour
     //chuẩn ra cần dùng delegate, event
     public bool hasPassed = false; // Biến đánh dấu xem đã tăng giá trị carsPassedTotal hay chưa
 
+    [SerializeField] 
+
     void Start()
     {
         transform = GetComponent<Transform>();
@@ -52,18 +54,26 @@ public class Car : MonoBehaviour
         if (ScoreManager.Ins.score >= 0 && ScoreManager.Ins.score < 50)
         {
             speed = 6.0f;
+            Player.Ins.speed = 5.0f;
+            Player.Ins.rotationSpeed = 5.0f;
         }
         else if (ScoreManager.Ins.score >= 50 && ScoreManager.Ins.score < 100)
         {
-            speed = 7.5f;
+            speed = 7.0f;
+            Player.Ins.speed = 6.0f;
+            Player.Ins.rotationSpeed = 6.0f;
         }
         else if (ScoreManager.Ins.score >= 100 && ScoreManager.Ins.score < 200)
         {
-            speed = 9.0f;
+            speed = 8.5f;
+            Player.Ins.speed = 7.5f;
+            Player.Ins.rotationSpeed = 7.5f;
         }
         else
         {
-            speed = 11.0f;
+            speed = 10.0f;
+            Player.Ins.speed = 9.0f;
+            Player.Ins.rotationSpeed = 9.0f;
         }
     } 
 }

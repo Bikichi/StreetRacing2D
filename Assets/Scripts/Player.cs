@@ -57,7 +57,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            roadScolling.speed = 12;
+            roadScolling.speed = 14f;
             transform.position += new Vector3(0, speed * Time.deltaTime, 0);
         }
     }
@@ -66,7 +66,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            roadScolling.speed = 6;
+            roadScolling.speed = 8f;
             transform.position -= new Vector3(0, speed * Time.deltaTime, 0);
         }
     } 
@@ -75,7 +75,7 @@ public class Player : MonoBehaviour
     {
         if (!Input.GetKey(KeyCode.UpArrow) && !Input.GetKey(KeyCode.DownArrow))
         {
-            roadScolling.speed = 8;
+            roadScolling.speed = 12f;
         }
     }
 
@@ -180,7 +180,7 @@ public class Player : MonoBehaviour
                 //truyền vào GameOject, vị trí, góc quay 
                 //Một Quaternion là một cách biểu diễn các phép quay trong không gian ba chiều. 
                 //khi bạn sử dụng Quaternion.identity, bạn đang chỉ định rằng không có phép quay nào được áp dụng, nghĩa là đối tượng sẽ không bị xoay khi được tạo ra hoặc di chuyển 
-                Destroy(bigBangCopy, 0.2f);
+                Destroy(bigBangCopy, 0.35f);
                 //phải set 1 khoảng thời gian chờ để chạy Animation trước khi Destroy GameObject
             }
             GameManager.Ins.GameOver();
