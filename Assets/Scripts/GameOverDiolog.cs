@@ -7,7 +7,8 @@ public class GameOverDiolog : MonoBehaviour
 {
     // Start is called before the first frame update
     public void ReplayGame()
-    {
+    {   
+        AdsManager.Instance.ReloadRewardedAd();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 

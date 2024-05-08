@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoinManager : MonoBehaviour
+public class Coin : MonoBehaviour
 {
     public Transform coinTransform;
     public float coinSpeed;
@@ -20,7 +20,7 @@ public class CoinManager : MonoBehaviour
             coinSpeed * Time.deltaTime,
             0f
             );
-        if (coinTransform.position.y <= -6)
+        if (coinTransform.position.y <= -6 || Player.Ins.isDead)
         {
             Destroy(gameObject);
         }

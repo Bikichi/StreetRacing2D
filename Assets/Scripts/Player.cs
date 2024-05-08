@@ -163,18 +163,13 @@ public class Player : MonoBehaviour
         }
     }
 
-    void RespawnPlayer() //khi xem quảng cáo thì thực hiện logic này để Player hồi sinh
-    {
-        //...
-    }
-
     private void OnTriggerEnter2D(Collider2D col) //Đây là khai báo của phương thức
                                                   //Nó sẽ được gọi mỗi khi một Collider2D khác va chạm với Collider2D của đối tượng này
                                                   //Tham số "col" là Collider2D của đối tượng khác mà va chạm với Collider2D của đối tượng này.
     {
         if (col.CompareTag(Const.CARS_TAG)) //nếu đối tượng này va chạm với đối tượng có tag là CARS_TAG thì thực thi
         {
-            gameObject.SetActive(false); //tắt đối tượng và phương thức gắn vào
+            Destroy(gameObject); //hủy đối tượng và phương thức gắn vào
             Destroy(col.gameObject); //hủy đối tượng va chạm phải
 
             isDead = true;
