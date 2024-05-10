@@ -78,6 +78,8 @@ public class GameManager : MonoBehaviour
         isGamePlaying = false;
         ScoreManager.Ins.lastScore = ScoreManager.Ins.score;
         gameoverDiolog.SetActive(true);
+        AudioController.Ins.StopPlayMusic();
+        AudioController.Ins.PlaySound(AudioController.Ins.explosion);
     }
 
     IEnumerator CountingDown()
@@ -91,9 +93,11 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
             time--;
             UpdateTimeCountingText(time);
+            AudioController.Ins.PlaySound(AudioController.Ins.timeBeep);
         }
 
         isGamePlaying = true;
         ShowGameGUI(true);
+        AudioController.Ins.PlayBackgroundMusic();
     }
 }

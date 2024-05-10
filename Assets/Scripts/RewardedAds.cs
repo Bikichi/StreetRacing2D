@@ -62,6 +62,7 @@ public class RewardedAds : MonoBehaviour ,IUnityAdsLoadListener ,IUnityAdsShowLi
             GameManager.Ins.gameoverDiolog.SetActive(false);
             rebornPlayer.Reborn();
             GameManager.Ins.isGamePlaying = true;
+            AudioController.Ins.PlayBackgroundMusic();
         }
     }
     #endregion

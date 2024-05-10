@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class AudioController : MonoBehaviour
 {
+    public static AudioController Ins;
+
     public static AudioClip audioClip   ;
 
     [Header("Main Settings:")]
@@ -22,6 +24,18 @@ public class AudioController : MonoBehaviour
     public AudioClip explosion;
     public AudioClip[] backgroundMusics;
 
+
+    private void Awake()
+    {
+        if (Ins != null && Ins != this)
+        {
+            Destroy(Ins);
+        }
+        else
+        {
+            Ins = this;
+        }
+    }
     /// <summary>
     /// Play Sound Effect
     /// </summary>

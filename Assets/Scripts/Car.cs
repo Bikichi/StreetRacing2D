@@ -38,10 +38,7 @@ public class Car : MonoBehaviour
         {
             return;
         }
-        //...!!!Mình đang muốn thực hiện Logic này trong ScoreManager để clean code
-        //Tuy nhiên Scripts này được gắn lên nhiều đối tượng khác nhau nên không thể sử dụng Singletons
-        //Cũng không thể truy cập đến thuộc tinh qua đối tượng được khởi tạo từ class này
-        //vì đối tượng được gắn Scripts này không mặc định tồn tại trên Scene mà được khởi tạo, hủy ngẫu nhiên liên tục
+      
         if (!hasPassed && transform.position.y <= Player.Ins.transform.position.y) // Nếu chưa tăng giá trị và vị trí của đối tượng xuống dưới đối tượng Player
         {
             ScoreManager.Ins.score += 1;
