@@ -22,6 +22,7 @@ public class AudioController : MonoBehaviour
     [Header("Game sounds and musics: ")]
     public AudioClip timeBeep;
     public AudioClip explosion;
+    public AudioClip collect;
     public AudioClip[] backgroundMusics;
 
 

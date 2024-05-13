@@ -190,6 +190,7 @@ public class Player : MonoBehaviour
         {
             Destroy(col.gameObject);
             ScoreManager.Ins.score += 10;
+            AudioController.Ins.PlaySound(AudioController.Ins.collect);
         }
     }
 }

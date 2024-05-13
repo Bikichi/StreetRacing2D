@@ -3426,8 +3426,11 @@ MonoBehaviour:
   sfxAus: {fileID: 1591341042}
   timeBeep: {fileID: 8300000, guid: d6fc276436429d74ca01ade03d82438b, type: 3}
   explosion: {fileID: 8300000, guid: 4213aa3ee68b95b43b096dc56face9ce, type: 3}
+  collect: {fileID: 8300000, guid: 341e2eb0fda8ea245b628bc14530d8e0, type: 3}
   backgroundMusics:
+  - {fileID: 8300000, guid: b01ace61e2b3e054a9f273a187f8d37e, type: 3}
   - {fileID: 8300000, guid: 2e8bbfb71c10afa48bde829e669623c0, type: 3}
+  - {fileID: 8300000, guid: 6cfaea24cde1fc244b3d3ee12cb822cc, type: 3}
 --- !u!4 &1591341045
 Transform:
   m_ObjectHideFlags: 0
@@ -3711,7 +3714,7 @@ MonoBehaviour:
   minSpawnCoinsTime: 1.5
   maxSpawnCoinsTime: 2
   elapsedTime: 0
-  delayTime: 30
+  delayTime: 10
 --- !u!1 &1811519975
 GameObject:
   m_ObjectHideFlags: 0
