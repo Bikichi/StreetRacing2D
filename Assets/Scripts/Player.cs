@@ -19,6 +19,12 @@ public class Player : MonoBehaviour
     public bool isDead;
     public RoadScolling roadScolling;
 
+    public PlayerDatabase playerDatabase;
+
+    public SpriteRenderer spriteRenderer;
+
+    private int selectedOption = 0;
+
     private void Awake()
     {
         if (Ins != null && Ins != this) //nếu như đã có thằng khác khởi tạo Singletons này
@@ -39,6 +45,16 @@ public class Player : MonoBehaviour
         ////Trong trường hợp của bạn, nếu hai scripts PlayerManager và RoadScolling không được gắn vào cùng một đối tượng, việc sử dụng GetComponent<RoadScolling>() sẽ không hoạt động.
         ////Để lấy thành phần từ một đối tượng khác trong Scene, bạn cần sử dụng các phương thức khác như FindObjectOfType<>() hoặc lưu trữ đối tượng đó từ một nguồn khác như đã đề cập trong cách trước đó.
         ////GetComponent<RoadScolling>() trong trường hợp này sẽ không hoạt động vì nó không thể tìm thấy thành phần RoadScolling trên cùng một đối tượng chứa script PlayerManager.
+        if (!PlayerPrefs.HasKey("selectedOption"))
+        {
+            selectedOption = 0;
+        }
+        else
+        {
+            Load();
+        }
+
+        UpdatePLayerCar(selectedOption);
     }
     void Update()
     {
@@ -149,7 +165,7 @@ public class Player : MonoBehaviour
                 limitY,
                 transform.position.z
                 );
-            roadScolling.speed = 8;
+            roadScolling.speed = 12f;
         }
 
         else if (transform.position.y <= -limitY)
@@ -159,7 +175,7 @@ public class Player : MonoBehaviour
                 -limitY,
                 transform.position.z
                 );
-            roadScolling.speed = 8;
+            roadScolling.speed = 12f;
         }
     }
 
@@ -192,5 +208,16 @@ public class Player : MonoBehaviour
             ScoreManager.Ins.score += 10;
             AudioController.Ins.PlaySound(AudioController.Ins.collect);
         }
+    }
+
+    private void UpdatePLayerCar(int selectedOption)
+    {
+        PlayerCar playerCar = playerDatabase.GetPlayerCar(selectedOption);
+        spriteRenderer.sprite = playerCar.playerCarSprite;
+    }
+
+    private void Load()
+    {
+        selectedOption = PlayerPrefs.GetInt("selectedOption");
     }
 }

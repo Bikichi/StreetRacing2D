@@ -7,6 +7,7 @@ public class RebornPlayer : MonoBehaviour
     public Transform transform;
     public GameObject player;
     public GameObject effect;
+
     void Start()
     {
         transform = GetComponent<Transform>();

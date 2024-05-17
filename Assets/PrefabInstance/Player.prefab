@@ -55,6 +55,8 @@ MonoBehaviour:
   bigBang: {fileID: 3836447719441125161, guid: 45e82069ce3f05246af5c68f6215b52e, type: 3}
   isDead: 0
   roadScolling: {fileID: 0}
+  playerDatabase: {fileID: 11400000, guid: 7b65c5b4413b92b4aa890b7464097aed, type: 2}
+  spriteRenderer: {fileID: 8697500674603980727}
 --- !u!212 &8697500674603980727
 SpriteRenderer:
   m_ObjectHideFlags: 0
