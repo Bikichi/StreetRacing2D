@@ -10,7 +10,7 @@ public class Car : MonoBehaviour
     //dễ dùng nhưng chưa tối ưu vì tạo cả 1 đối tượng nhưng chỉ dùng để truy cập tới 1 thuộc tính cần
     //chuẩn ra cần dùng delegate, event
     public bool hasPassed = false; // Biến đánh dấu xem đã tăng giá trị carsPassedTotal hay chưa
-    public SpawningCars spawningCars;
+    public SpawningCarsManager spawningCars;
     [SerializeField] 
 
     void Start()
@@ -21,7 +21,7 @@ public class Car : MonoBehaviour
         ////Trong trường hợp của bạn, nếu hai scripts Car và ScoreManger không được gắn vào cùng một đối tượng, việc sử dụng GetComponent<ScoreManger>() sẽ không hoạt động.
         ////Để lấy thành phần từ một đối tượng khác trong Scene, bạn cần sử dụng các phương thức khác như FindObjectOfType<>() hoặc lưu trữ đối tượng đó từ một nguồn khác như đã đề cập trong cách trước đó.
         ////GetComponent<ScoreManger>() trong trường hợp này sẽ không hoạt động vì nó không thể tìm thấy thành phần ScoreManger trên đối tượng chứa script Car.
-        spawningCars = GameObject.FindObjectOfType<SpawningCars>();
+        spawningCars = GameObject.FindObjectOfType<SpawningCarsManager>();
     }
 
     void Update()
