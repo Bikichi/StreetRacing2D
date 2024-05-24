@@ -17,8 +17,6 @@ public class ScoreManager : MonoBehaviour
     public Text lastScoreText;
     public Text bestScoreText;
 
-    //public Car car; //không thể dùng Singletons ở đẩy vì có nhiều đối tượng Car khác nhau
-
     private void Awake()
     {
         if (Ins != null && Ins != this)
@@ -33,7 +31,7 @@ public class ScoreManager : MonoBehaviour
 
     void Start ()
     {
-        bestScore = PlayerPrefs.GetInt("bestScore", 0);
+        LoadBestScoreValue();
     }
 
     void Update()
@@ -41,16 +39,24 @@ public class ScoreManager : MonoBehaviour
         UpdateScoreValue();
     }
 
-    void UpdateScoreValue ()
+    public void LoadBestScoreValue ()
     {
-        scoreText.text = "Score: " + score.ToString();
-        lastScoreText.text = lastScore.ToString();
-        bestScoreText.text = bestScore.ToString();
+        bestScore = PlayerPrefs.GetInt("bestScore", 0);
+    }
+
+    public void SaveBestScoreValue ()
+    {
         //ép kiểu dữ liệu
         if (score > bestScore)
         {
             bestScore = score;
             PlayerPrefs.SetInt("bestScore", bestScore);
         }
+    }
+    void UpdateScoreValue ()
+    {
+        lastScoreText.text = lastScore.ToString();
+        bestScoreText.text = bestScore.ToString();
+        scoreText.text = "Score: " + score.ToString();
     }
 }

@@ -11,7 +11,7 @@ public class Car : MonoBehaviour
     //chuẩn ra cần dùng delegate, event
     public bool hasPassed = false; // Biến đánh dấu xem đã tăng giá trị carsPassedTotal hay chưa
     public SpawningCarsManager spawningCars;
-    [SerializeField] 
+    //public Car car; //không thể dùng Singletons ở đẩy vì có nhiều đối tượng Car khác nhau
 
     void Start()
     {
@@ -54,7 +54,7 @@ public class Car : MonoBehaviour
             speed = 6.0f;
             Player.Ins.speed = 5.0f;
             Player.Ins.rotationSpeed = 5.0f;
-            spawningCars.delayTime = 0.95f;
+            spawningCars.delayTime = 1.0f;
         }
         else if (ScoreManager.Ins.score >= 30 && ScoreManager.Ins.score < 60)
         {
@@ -66,14 +66,21 @@ public class Car : MonoBehaviour
             speed = 8.5f;
             Player.Ins.speed = 6.0f;
             Player.Ins.rotationSpeed = 6.0f;
-            spawningCars.delayTime = 0.7f;
+            spawningCars.delayTime = 0.6f;
         }
-        else
+        else if (ScoreManager.Ins.score >= 100 && ScoreManager.Ins.score < 150)
         {
             speed = 10.0f;
             Player.Ins.speed = 7.0f;
             Player.Ins.rotationSpeed = 7.0f;
-            spawningCars.delayTime = 0.6f;
+            spawningCars.delayTime = 0.5f;
+        }
+        else
+        {
+            speed = 11.0f;
+            Player.Ins.speed = 7.5f;
+            Player.Ins.rotationSpeed = 7.5f;
+            spawningCars.delayTime = 0.4f;
         }
     } 
 }

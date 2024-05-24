@@ -5,5 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerCar
 {
+    public string name;
     public Sprite playerCarSprite;
+    public int price;
+    public bool isUnlocked;
 }

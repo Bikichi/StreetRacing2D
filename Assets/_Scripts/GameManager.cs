@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     public GameObject pauseDialog;
     public GameObject gameoverDiolog;
     public Text timeCountingText;
-
+    public Text totalCoinValueInGameText;
     private void Awake()
     {
         if (Ins != null && Ins != this)
@@ -25,6 +25,11 @@ public class GameManager : MonoBehaviour
         {
             Ins = this;
         }
+    }
+
+    private void Update()
+    {
+        UpdateCoinValueInGame();
     }
 
     public void ShowGameGUI(bool isShow)
@@ -105,5 +110,10 @@ public class GameManager : MonoBehaviour
         isGamePlaying = true;
         ShowGameGUI(true);
         AudioController.Ins.PlayBackgroundMusic();
+    }
+
+    void UpdateCoinValueInGame()
+    {
+        totalCoinValueInGameText.text = "Coin: " + CoinManager.Ins.totalCoinValue.ToString(); //cú pháp này thay cho việc sửa tay Component Text trong Game Object  
     }
 }

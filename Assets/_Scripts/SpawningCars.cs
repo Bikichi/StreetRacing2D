@@ -12,8 +12,6 @@ public class SpawningCarsManager : MonoBehaviour
 
     public float elapsedTime;
     public float delayTime;
-
-    public float spawnXSpacing = 1.0f; // Khoảng cách giữa các đối tượng theo trục x
     void Start()
     {
         carsTransform = GetComponent<Transform>();
@@ -33,36 +31,20 @@ public class SpawningCarsManager : MonoBehaviour
         }
     }
 
-    float GetSpawnCarsTime()
+    public float GetSpawnCarsTime()
     {
         float spawnCarsTime = Random.Range(minSpawnCarsTime, maxSpawnCarsTime);
         return spawnCarsTime;
     }
 
-    float GetSpawnXPosition()
+    public float GetSpawnXPosition()
     {
         float spawnXPosition = Random.Range(-1.89f, 1.89f);   
         return spawnXPosition;
     }
 
-    void SpawningCars()
+    public void SpawningCars()
     {
         Instantiate(cars[Random.Range(0, cars.Length)], new Vector3(GetSpawnXPosition(), transform.position.y, transform.position.z), Quaternion.Euler(0, 0, 90));
-    }
-
-    float CalculateNextSpawnX()
-    {
-        float lastSpawnXPosition;
-        float SpawnX = GetSpawnXPosition() + spawnXSpacing; // Tính toán vị trí x mới
-        lastSpawnXPosition = Mathf.Clamp(SpawnX, -1.89f, 1.89f);
-        // Cập nhật lại giá trị của lastSpawnXPosition
-        // Giới hạn vị trí x mới trong khoảng (-1.89f, 1.89f)
-        return GetSpawnXPosition();
-    }
-
-    void SpawnCarsDontOverlapEachOther ()
-    {
-        float newSpawnX = CalculateNextSpawnX(); // Tính toán vị trí x mới
-        Instantiate(cars[Random.Range(0, cars.Length)], new Vector3(newSpawnX, transform.position.y, transform.position.z), Quaternion.Euler(0, 0, 90));
     }
 }

@@ -69,7 +69,7 @@ public class Player : MonoBehaviour
         CheckLimitPositionY();
     }
 
-    void MoveUp ()
+    public void MoveUp ()
     {
         if (Input.GetKey(KeyCode.UpArrow))
         {
@@ -78,7 +78,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    void MoveDown()
+    public void MoveDown()
     {
         if (Input.GetKey(KeyCode.DownArrow))
         {
@@ -95,7 +95,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    void MoveRight()
+    public void MoveRight()
     {
         if (Input.GetKey(KeyCode.RightArrow))
         {
@@ -107,7 +107,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    void MoveLeft()
+    public void MoveLeft()
     {
         if (Input.GetKey(KeyCode.LeftArrow))
         {
@@ -191,21 +191,24 @@ public class Player : MonoBehaviour
             isDead = true;
             if (bigBang) //nếu đối tượng khác null
             {
-                var bigBangCopy = Instantiate(bigBang, transform.position, Quaternion.identity); //đối tượng được tạo ra từ Instantiate là 1 bản sao của bigBang
+                var newBigBang = Instantiate(bigBang, transform.position, Quaternion.identity); //đối tượng được tạo ra từ Instantiate là 1 bản sao của bigBang
                 //Instantiate() là một phương thức được sử dụng để tạo ra một BẢN SAO mới của một prefab hoặc một đối tượng có sẵn trong trò chơi
                 //truyền vào GameOject, vị trí, góc quay 
                 //Một Quaternion là một cách biểu diễn các phép quay trong không gian ba chiều. 
                 //khi bạn sử dụng Quaternion.identity, bạn đang chỉ định rằng không có phép quay nào được áp dụng, nghĩa là đối tượng sẽ không bị xoay khi được tạo ra hoặc di chuyển 
-                Destroy(bigBangCopy, 0.35f);
+                Destroy(newBigBang, 0.35f);
                 //phải set 1 khoảng thời gian chờ để chạy Animation trước khi Destroy GameObject
             }
             GameManager.Ins.GameOver();
+            ScoreManager.Ins.SaveBestScoreValue();
+            CoinManager.Ins.SaveCoinValue();
         }
 
         if (col.CompareTag(Const.COIN_TAG))
         {
             Destroy(col.gameObject);
             ScoreManager.Ins.score += 10;
+            CoinManager.Ins.totalCoinValue += 1;
             AudioController.Ins.PlaySound(AudioController.Ins.collect);
         }
     }
