@@ -26,7 +26,7 @@ public class AdsManager : MonoBehaviour
 
         //bannerAds.LoadBannerAd();
         //interstitialAds.LoadInterstitialAd();
-        //rewardedAds.LoadRewardedAd();
+        ReloadRewardedAd();
     }
 
     public void ReloadRewardedAd()

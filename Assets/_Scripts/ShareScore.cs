@@ -5,15 +5,13 @@ using System.IO;
 
 public class Share_Score : MonoBehaviour
 {
-
-    int highScore = 0;
     string appName;
     string message;
 
     public void ShareScore()
     {
         appName = "Street Racing 2D";
-        message = "I scored a new HighScore of " + highScore.ToString() + " in " + appName;
+        message = "I scored a new HighScore of " + ScoreManager.Ins.bestScore.ToString() + " in " + appName;
 
         StartCoroutine(TakeScreenshotAndShare());
     }
