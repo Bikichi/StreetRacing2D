@@ -7,11 +7,11 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public Text coinText;
-    public Button playButton;
-
+    public Button buyNoAdsButton;
     public void Update()
     {
         UpdateCoinValue();
+        CheckBuyNoAdsButton();
     }
 
     public void UpdateCoinValue()
@@ -22,5 +22,16 @@ public class UIManager : MonoBehaviour
     public void ChangeScene(int sceneID)
     {
         SceneManager.LoadScene(sceneID);
+    }
+    public void CheckBuyNoAdsButton()
+    {
+        if (PlayerPrefs.GetInt("isRemoveAds", 0) == 0)
+        {
+            buyNoAdsButton.gameObject.SetActive(true);
+        }
+        else
+        {
+            buyNoAdsButton.gameObject.SetActive(false);
+        }
     }
 }

@@ -4,25 +4,27 @@ using UnityEngine;
 
 public class RebornPlayer : MonoBehaviour
 {
-    public Transform transform;
+    public Transform rebornTransform;
     public GameObject player;
     public GameObject effect;
 
     void Start()
     {
-        transform = GetComponent<Transform>();
+        rebornTransform = GetComponent<Transform>();
     }
     public void Reborn()
     {
+        GameManager.Ins.gameoverDiolog.SetActive(false);
+        
+        Player.Ins.isDead = false;
+        player.gameObject.SetActive(true);
+        
+        GameManager.Ins.isGamePlaying = true;
+        AudioController.Ins.PlayBackgroundMusic();
         if (effect) 
         {
-            var effectI = Instantiate(effect, transform.position, Quaternion.identity);
+            var effectI = Instantiate(effect, player.transform.position, Quaternion.identity);
             Destroy(effectI, 0.5f);
-        }
-
-        if (player)
-        {
-            Instantiate(player, transform.position, Quaternion.identity);
         }
     }
 }

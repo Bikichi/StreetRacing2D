@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SpawningCoins : MonoBehaviour
 {
-    public Transform transform;
+    public Transform SCtransform;
     public GameObject coin;  
     
     public float minSpawnCoinsTime;
@@ -16,7 +16,7 @@ public class SpawningCoins : MonoBehaviour
 
     void Start()
     {
-        transform = GetComponent<Transform>(); 
+        SCtransform = GetComponent<Transform>(); 
     }
 
     void Update()
@@ -37,6 +37,6 @@ public class SpawningCoins : MonoBehaviour
 
     void SpawnCoins()
     {
-        Instantiate(coin, new Vector3 (Random.Range(-1.89f, 1.89f), transform.position.y, transform.position.z), Quaternion.Euler(0, 0, 0));
+        Instantiate(coin, new Vector3 (Random.Range(-1.89f, 1.89f), SCtransform.position.y, SCtransform.position.z), Quaternion.Euler(0, 0, 0));
     }
 }

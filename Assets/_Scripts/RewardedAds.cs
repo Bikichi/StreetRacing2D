@@ -1,8 +1,7 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Advertisements;
-using UnityEngine.UI;
 
 public class RewardedAds : MonoBehaviour ,IUnityAdsLoadListener ,IUnityAdsShowListener
 {
@@ -10,6 +9,8 @@ public class RewardedAds : MonoBehaviour ,IUnityAdsLoadListener ,IUnityAdsShowLi
     [SerializeField] private string iosAdUnitId;
     [SerializeField] private GameObject rebornButton;
     [SerializeField] private RebornPlayer rebornPlayer;
+
+    [SerializeField] public bool isRemoveAds;
 
     private string adUnitId;
 
@@ -20,6 +21,14 @@ public class RewardedAds : MonoBehaviour ,IUnityAdsLoadListener ,IUnityAdsShowLi
         #elif UNITY_ANDROID
                 adUnitId = androidAdUnitId;
         #endif
+        if (PlayerPrefs.GetInt("isRemoveAds", 0) == 0) // = 0 là chiếc xe chưa được mở khoá
+        {
+            isRemoveAds = false;
+        }
+        else
+        {
+            isRemoveAds = true;
+        }
     }
 
 
@@ -30,13 +39,22 @@ public class RewardedAds : MonoBehaviour ,IUnityAdsLoadListener ,IUnityAdsShowLi
 
     public void ShowRewardedAd()
     {
-        Advertisement.Show(adUnitId, this);
         LoadRewardedAd();
-        rebornButton.SetActive(false);
+        Advertisement.Show(adUnitId, this);
     }
 
-
-
+    public void CheckRewardedAd()
+    {
+        rebornButton.SetActive(false);
+        if (isRemoveAds)
+        {
+            rebornPlayer.Reborn();
+        }
+        else
+        {
+            ShowRewardedAd();
+        }
+    }
 
     #region LoadCallbacks
     public void OnUnityAdsAdLoaded(string placementId)
@@ -59,10 +77,7 @@ public class RewardedAds : MonoBehaviour ,IUnityAdsLoadListener ,IUnityAdsShowLi
         if (placementId == adUnitId && showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED))
         {
             Debug.Log("Ads Fully Watched .....");
-            GameManager.Ins.gameoverDiolog.SetActive(false);
             rebornPlayer.Reborn();
-            GameManager.Ins.isGamePlaying = true;
-            AudioController.Ins.PlayBackgroundMusic();
         }
     }
     #endregion

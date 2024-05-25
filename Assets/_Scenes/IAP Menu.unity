@@ -1162,7 +1162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinText: {fileID: 982007188}
-  playButton: {fileID: 433035581}
+  buyNoAdsButton: {fileID: 1592214663}
 --- !u!4 &967148427
 Transform:
   m_ObjectHideFlags: 0

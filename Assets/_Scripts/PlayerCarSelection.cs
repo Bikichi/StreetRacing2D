@@ -144,6 +144,7 @@ public class PlayerCarSelection: MonoBehaviour
         int coins = PlayerPrefs.GetInt("totalCoinValue", 0);
         int price = playerCars[selectedOption].price;
         PlayerPrefs.SetInt("totalCoinValue", coins - price);
+        CoinManager.Ins.LoadCoinValue();
         PlayerPrefs.SetInt(playerCars[selectedOption].name, 1); // = 1 tức là đã mở khoá chiếc xe
         SaveOptions();
         playerCars[selectedOption].isUnlocked = true;

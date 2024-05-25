@@ -17,9 +17,9 @@ public class PauseDiolog : MonoBehaviour
         Time.timeScale = 1.0f;
         AdsManager.Instance.ReloadRewardedAd();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        CoinManager.Ins.LoadCoinValue();
     }
 
-    // Update is called once per frame
     public void ExitGame()
     {
         Application.Quit();

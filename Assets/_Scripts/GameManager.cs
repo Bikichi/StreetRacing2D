@@ -12,7 +12,8 @@ public class GameManager : MonoBehaviour
     public GameObject homeGui;
     public GameObject gameGui;
     public GameObject pauseDialog;
-    public GameObject gameoverDiolog;
+    public GameObject gameoverDiolog; 
+    public GameObject tutorialDiolog;
     public Text timeCountingText;
     public Text totalCoinValueInGameText;
     private void Awake()
@@ -70,6 +71,11 @@ public class GameManager : MonoBehaviour
         ShowGameGUI(false);
     }
 
+    public void ShowTutorialPanel()
+    {
+        tutorialDiolog.SetActive(true);
+    }
+
     public void PauseGame ()
     {
         Time.timeScale = 0f;
@@ -88,6 +94,8 @@ public class GameManager : MonoBehaviour
     {
         isGamePlaying = false;
         ScoreManager.Ins.lastScore = ScoreManager.Ins.score;
+        CoinManager.Ins.SaveCoinValue();
+        ScoreManager.Ins.SaveBestScoreValue();
         gameoverDiolog.SetActive(true);
         AudioController.Ins.StopPlayMusic();
         AudioController.Ins.PlaySound(AudioController.Ins.explosion);

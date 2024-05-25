@@ -20,6 +20,7 @@ public class SpawningCarsManager : MonoBehaviour
     {
         if (GameManager.Ins.isGamePlaying && !Player.Ins.isDead)
         {
+            UpDelaytimeAccordingToScore();
             elapsedTime += Time.deltaTime;
 
             if (elapsedTime >= delayTime) //delayTime set phải > minSpawnCarsTime 1 khoảng nhất định không sẽ xảy ra tình trạng 2 xe sinh ra gần như cùng lúc
@@ -46,5 +47,29 @@ public class SpawningCarsManager : MonoBehaviour
     public void SpawningCars()
     {
         Instantiate(cars[Random.Range(0, cars.Length)], new Vector3(GetSpawnXPosition(), transform.position.y, transform.position.z), Quaternion.Euler(0, 0, 90));
+    }
+
+    void UpDelaytimeAccordingToScore() //tăng tốc độ theo điểm số
+    {
+        if (ScoreManager.Ins.score >= 0 && ScoreManager.Ins.score < 30)
+        {
+            delayTime = 1.0f;
+        }
+        else if (ScoreManager.Ins.score >= 30 && ScoreManager.Ins.score < 60)
+        {
+            delayTime = 0.8f;
+        }
+        else if (ScoreManager.Ins.score >= 60 && ScoreManager.Ins.score < 100)
+        {
+            delayTime = 0.6f;
+        }
+        else if (ScoreManager.Ins.score >= 100 && ScoreManager.Ins.score < 150)
+        {
+            delayTime = 0.5f;
+        }
+        else
+        {
+            delayTime = 0.45f;
+        }
     }
 }

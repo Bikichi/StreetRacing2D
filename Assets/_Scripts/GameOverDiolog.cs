@@ -9,9 +9,10 @@ public class GameOverDiolog : MonoBehaviour
 {
     public Text totalCoinValueInGameoverDiologText;
     public void ReplayGame()
-    {   
+    {
         AdsManager.Instance.ReloadRewardedAd();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        CoinManager.Ins.LoadCoinValue(); 
     }
 
     public void ExitGame()
