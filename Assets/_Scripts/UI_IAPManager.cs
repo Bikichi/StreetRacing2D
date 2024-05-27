@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class UI_IAPManager : MonoBehaviour
 {
     public Text coinText;
     public Button buyNoAdsButton;

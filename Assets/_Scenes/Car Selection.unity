@@ -1216,19 +1216,19 @@ MonoBehaviour:
   playerDatabase: {fileID: 11400000, guid: 7b65c5b4413b92b4aa890b7464097aed, type: 2}
   spriteRenderer: {fileID: 1163697959}
   playerCars:
-  - name: a
+  - name: Classic
     playerCarSprite: {fileID: 21300000, guid: 07ec6c7c021237f4292037b4c4d79830, type: 3}
     price: 0
     isUnlocked: 0
-  - name: b
+  - name: RedKing
     playerCarSprite: {fileID: 21300000, guid: 6e258189221a0f44c9bc693f9b305f2b, type: 3}
     price: 300
     isUnlocked: 0
-  - name: c
+  - name: SuperPolice
     playerCarSprite: {fileID: 21300000, guid: 04ee8974d7639444099e25df8a173a0d, type: 3}
     price: 500
     isUnlocked: 0
-  - name: d
+  - name: RollRoyce
     playerCarSprite: {fileID: 21300000, guid: 9cccda0c6ad776441bd54d0206c4ba18, type: 3}
     price: 1000
     isUnlocked: 0

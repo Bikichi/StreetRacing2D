@@ -6,7 +6,7 @@ public class TutorialDiolog : MonoBehaviour
 {
     public GameObject tutorialMenu;
     
-    public void BackToMenu ()
+    public void BackToMenu()
     { 
         tutorialMenu.SetActive(false);
     }

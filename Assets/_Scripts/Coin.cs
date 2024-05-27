@@ -12,7 +12,6 @@ public class Coin : MonoBehaviour
         coinTransform = GetComponent<Transform>();
     }
 
-    
     void Update()
     {
         coinTransform.position -= new Vector3(
