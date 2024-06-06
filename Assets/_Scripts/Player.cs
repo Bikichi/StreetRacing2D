@@ -49,8 +49,8 @@ public class Player : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D col) //Đây là khai báo của phương thức
-                                                  //Nó sẽ được gọi mỗi khi một Collider2D khác va chạm với Collider2D của đối tượng này
-                                                  //Tham số "col" là Collider2D của đối tượng khác mà va chạm với Collider2D của đối tượng này.
+                                                  //Nó sẽ được gọi mỗi khi một Collider2D khác va chạm với Collider2D của đối tượng được gắn scripts này
+                                                  //Tham số "col" là Collider2D của đối tượng khác mà va chạm với Collider2D của đối tượng được gắn scripts này.
     {
         if (col.CompareTag(Const.CARS_TAG)) //nếu đối tượng này va chạm với đối tượng có tag là CARS_TAG thì thực thi
         {

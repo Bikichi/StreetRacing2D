@@ -1,4 +1,4 @@
 Product ID,Published State,Purchase Type,Auto Translate,Locale; Title; Description,Auto Fill Prices,Price,Pricing Template ID
-com.phong.streetracing2d.coin100,published,managed_by_android,false,en_US;100 coins;Give the player 100 coins,true,990000,
-com.phong.streetracing2d.coin999,published,managed_by_android,false,en_US;999 coins;Give the player 999 coins,true,4990000,
-com.phong.streetracing2d.noads,published,managed_by_android,false,en_US;No ads;No ads,true,1990000,
+com.phong.streetracing2d.coin100,published,managed_by_android,FALSE,en_US;100 coins;Give the player 100 coins,TRUE,25,
+com.phong.streetracing2d.coin999,published,managed_by_android,FALSE,en_US;999 coins;Give the player 999 coins,TRUE,126,
+com.phong.streetracing2d.noads,published,managed_by_android,FALSE,en_US;No ads;No ads,TRUE,51,
